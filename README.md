@@ -67,3 +67,16 @@ streamlit run streamlit_app.py
 ```
 
 See [STREAMLIT_GUIDE.md](STREAMLIT_GUIDE.md) for details. The app's separately trained model may have different performance from the executed notebook.
+
+## Live Streamlit demo
+
+**[Try the Amazon Review Sentiment AI app](https://amazon-review-sentiment-ai.streamlit.app/)** — enter an Amazon-style food review to predict positive or negative sentiment using TF-IDF and balanced Logistic Regression.
+
+### Deployed model evaluation (local training run, October 26, 2026)
+
+| Metric | Result |
+|---|---:|
+| Held-out test accuracy | **90.7%** |
+| Macro F1-score | **0.845** |
+
+These are the metrics printed by `train_model.py` for the model exported to `models/sentiment_pipeline.joblib.gz`, as reported from the local training run. They are distinct from the executed notebook's 90.2% accuracy / 0.835 macro F1 because the training pipelines and samples may differ. Star ratings provide proxy sentiment labels (1–2 negative, 4–5 positive; 3-star reviews excluded). Model confidence estimates are not guarantees of correctness.
