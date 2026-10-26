@@ -4,7 +4,7 @@ import joblib
 import streamlit as st
 
 ROOT = Path(__file__).resolve().parent
-MODEL = ROOT / "models" / "sentiment_pipeline.joblib"
+MODEL = ROOT / "models" / "sentiment_pipeline.joblib.gz"
 
 st.set_page_config(page_title="Amazon Review Sentiment AI", page_icon="🛍️", layout="centered")
 st.title("🛍️ Amazon Review Sentiment AI")
@@ -12,8 +12,8 @@ st.caption("TF-IDF + Logistic Regression | Amazon Fine Food Reviews")
 st.write("Enter a product review to estimate whether its language resembles reviews rated 1–2 stars (negative) or 4–5 stars (positive).")
 
 if not MODEL.is_file():
-    st.warning("No trained model found. Run `python train_model.py` from the project folder first.")
-    st.code("python train_model.py\nstreamlit run streamlit_app.py", language="bash")
+    st.warning("Trained model not deployed yet. Run `python export_model.py` locally, then upload `models/sentiment_pipeline.joblib.gz` to this repository.")
+    st.code("python train_model.py\npython export_model.py\nstreamlit run streamlit_app.py", language="bash")
     st.stop()
 
 @st.cache_resource
@@ -47,6 +47,6 @@ with st.expander("About this model"):
     - Dataset: [SNAP Amazon Fine Food Reviews](https://www.kaggle.com/datasets/snap/amazon-fine-food-reviews)
     - Labels: 1–2 stars = negative; 4–5 stars = positive; 3-star reviews excluded.
     - Algorithm: TF-IDF (unigrams and bigrams) + balanced Logistic Regression.
-    - The app uses a locally trained model. Reported notebook metrics are **not** automatically the metrics of this newly trained artifact.
+    - The app uses an exported trained model. Reported notebook metrics are **not** automatically the metrics of this separately trained artifact.
     - The dataset records reviews, not confirmed purchases.
     """)
