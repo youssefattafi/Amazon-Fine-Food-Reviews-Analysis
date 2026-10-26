@@ -1,10 +1,8 @@
 jupyter
 notebook
+ipykernel
 pandas
 numpy
 matplotlib
 seaborn
 scikit-learn
-plotly
-wordcloud
-nltk
