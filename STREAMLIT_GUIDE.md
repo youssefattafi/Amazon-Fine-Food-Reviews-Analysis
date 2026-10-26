@@ -1,25 +1,33 @@
-# Streamlit Sentiment App
+# Deploy the Amazon Review Sentiment AI app
 
-This app lets visitors type an Amazon-style food review and see a model prediction.
+The app runs locally and is ready for Streamlit Community Cloud **after you add the trained model artifact**. The GitHub repository currently contains the code but not the model weights.
 
-## Quick start
+## Step 1: Export the model on your Mac
 
-1. Clone or download this repository.
-2. Download the Kaggle dataset from https://www.kaggle.com/datasets/snap/amazon-fine-food-reviews and put `database.sqlite` in the repository root.
-3. In a terminal in the repository root, run:
+In the new project folder containing `database.sqlite`, run:
 
 ```bash
 python -m pip install -r requirements.txt
 python train_model.py
-streamlit run streamlit_app.py
+python export_model.py
 ```
 
-The training script creates `models/sentiment_pipeline.joblib` locally. Neither the SQLite database nor the model artifact is committed to GitHub.
+The exporter compresses the trained model to `models/sentiment_pipeline.joblib.gz`. It does not upload the 373 MB SQLite dataset. If you already trained the model, you can skip `python train_model.py`.
 
-**Security:** Only load model files you created or trust. Joblib/pickle can execute code when loading untrusted artifacts.
+## Step 2: Upload the exported model to GitHub
+
+Open the repository's `models` folder (or use GitHub's **Add file → Upload files** at the repository root and upload a folder containing the artifact). Upload **only** `models/sentiment_pipeline.joblib.gz` and commit. GitHub's web upload limit is 25 MiB per file. If the artifact is larger, stop and use a separate model-hosting approach instead.
+
+Never upload `database.sqlite` or the uncompressed `.joblib` model.
+
+## Step 3: Deploy on Streamlit Community Cloud
+
+1. Visit https://share.streamlit.io/ and sign in with GitHub.
+2. Choose **Create app → Deploy a public app from GitHub**.
+3. Repository: `youssefattafi/Amazon-Fine-Food-Reviews-Analysis`; branch: `main`; main file: `streamlit_app.py`.
+4. Click **Deploy** and wait for the app to build.
+5. Test both positive and negative sample reviews; share the resulting public URL in your resume or portfolio.
 
 ## Notes
 
-The app model is trained by `train_model.py`; it is not the already-fitted model from the Jupyter session. Its accuracy may differ from the notebook's 90.2% because sampling and preprocessing differ. Run training to see this model's own measured accuracy and macro F1.
-
-To deploy publicly, arrange a trusted model artifact in the deployment environment or add a safe training/build process. The app will show setup instructions until a model exists.
+The model is trained locally, not on Streamlit's server. The SQLite dataset is not required for inference. The training script's metrics may differ from the executed notebook's 90.2% accuracy. Joblib files must only be loaded from trusted sources, because loading them can execute code. For reproducibility, use compatible scikit-learn versions between training and deployment.
