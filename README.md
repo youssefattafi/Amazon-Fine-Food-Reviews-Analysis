@@ -55,3 +55,15 @@ Confusion matrix (rows: actual negative/positive; columns: predicted negative/po
 | Actual positive | 1,202 | 12,489 |
 
 **Interpretation:** The model exceeds the majority baseline by 5.7 percentage points, but negative-class precision (64.0%) is substantially lower than positive-class precision (97.1%). The dataset uses star ratings as proxy sentiment labels; these results are for a random review-level split, not guaranteed performance on unseen products.
+
+## Interactive Streamlit app
+
+The [Streamlit app](streamlit_app.py) accepts review text and predicts rating-derived positive or negative sentiment. It requires a locally trained model, which is not committed to GitHub.
+
+```bash
+python -m pip install -r requirements.txt
+python train_model.py
+streamlit run streamlit_app.py
+```
+
+See [STREAMLIT_GUIDE.md](STREAMLIT_GUIDE.md) for details. The app's separately trained model may have different performance from the executed notebook.
