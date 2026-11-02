@@ -80,3 +80,12 @@ See [STREAMLIT_GUIDE.md](STREAMLIT_GUIDE.md) for details. The app's separately t
 | Macro F1-score | **0.845** |
 
 These are the metrics printed by `train_model.py` for the model exported to `models/sentiment_pipeline.joblib.gz`, as reported from the local training run. They are distinct from the executed notebook's 90.2% accuracy / 0.835 macro F1 because the training pipelines and samples may differ. Star ratings provide proxy sentiment labels (1–2 negative, 4–5 positive; 3-star reviews excluded). Model confidence estimates are not guarantees of correctness.
+
+
+## Explore my other deployed projects
+
+- **[Pharmaceutical Sales Forecasting & AI Demand Prediction](https://github.com/youssefattafi/Pharmaceutical-Sales-Forecasting)** — [Live forecasting dashboard](https://pharma-sales-forecasting-ai.streamlit.app/) · [FastAPI documentation](https://pharma-forecast-api-vews.onrender.com/docs)
+- **[Amazon Review Sentiment AI](https://github.com/youssefattafi/Amazon-Fine-Food-Reviews-Analysis)** — [Live NLP app](https://amazon-review-sentiment-ai.streamlit.app/)
+- **[Hotel Booking Analytics](https://github.com/youssefattafi/Hotel-Booking-Data-Analysis)** — [Live analytics dashboard](https://hotel-booking-analytics-ai.streamlit.app/)
+
+[See all featured projects on my GitHub profile](https://github.com/youssefattafi)
